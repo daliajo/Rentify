@@ -1,4 +1,4 @@
-# Rentify 🏠
+# Rentify 🧡
 
 Rentify is a mobile rental platform designed to provide users with convenient access to a wide range of items without the need for ownership.
 The platform enables individuals to rent items for short-term use, reducing unnecessary purchases and promoting efficient resource utilization.
