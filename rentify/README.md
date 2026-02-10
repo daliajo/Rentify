@@ -28,65 +28,31 @@ Rentify was designed with the following goals in mind:
 
 ---
 
-## 🛠️ Technologies Used
+## 🛠️ Tech Stack
 
-### 📱 Frontend (Mobile App)
+### 📱 Frontend
 - **Flutter (Dart)**  
-  Used to build a cross-platform mobile application with a consistent UI and smooth performance.
-- **Flutter Widgets & Navigation**
-  - `StatefulWidget` for interactive screens (search, filters, editing states)
-  - `Navigator` and route-based navigation for page transitions
-  - `BottomNavigationBar` for customer and renter main flows
-- **UI/UX Implementation**
-  - Responsive layouts using `GridView`, `ListView`, `SingleChildScrollView`
-  - Consistent styling (colors, spacing, typography) across the app
-  - Friendly states (loading indicators, empty states, validation messages)
+  Used to build a cross-platform mobile application with a clean, responsive UI and smooth user interactions.
+- **Flutter Navigation & Widgets**  
+  Utilized core Flutter widgets such as `StatefulWidget`, `ListView`, `GridView`, and `BottomNavigationBar` to structure screens, manage state, and handle navigation flows.
 
-### 🔥 Backend-as-a-Service (Firebase)
-- **Firebase Authentication**
-  - User sign-in identity via `FirebaseAuth.instance.currentUser`
-  - Role-based flows using `uid` references (e.g., `renterId` stored in item documents)
-- **Cloud Firestore (NoSQL Database)**
-  - Primary database for core collections such as:
-    - `rentify_items` (items + metadata)
-    - `orders` (rental orders + dates + totals)
-    - chat-related collections (messages/threads depending on implementation)
-  - Real-time updates using streams:
-    - `snapshots()` + `StreamBuilder` for live UI updates (home, store, dashboards)
-  - Query features used in code:
-    - `where(...)` filtering (category, renterId, status)
-    - `orderBy(...)` sorting (createdAt, price)
-    - `limit(...)` for previews (Discover section)
-  - Server timestamps:
-    - `FieldValue.serverTimestamp()` for consistent createdAt values
-- **Firebase Storage**
-  - Stores item images as files
-  - Firestore stores only the **download URL**
-  - Upload logic includes:
-    - `putFile(...)` for mobile
-    - `putData(...)` for web bytes
-  - Image URLs are displayed via `Image.network(...)`
+### 🔥 Backend & Services (Firebase)
+- **Firebase Authentication**  
+  Handles user identification and role separation using unique user IDs.
+- **Cloud Firestore**  
+  Serves as the main database for storing items, orders, and user-related data, with real-time updates using streams.
+- **Firebase Storage**  
+  Used for storing item images, while Firestore maintains image URLs and metadata.
 
-### 🧠 Business Logic & Services
-- **ItemStatusService (Availability + Expired Rentals)**
-  - Checks expired orders using `endDate < now`
-  - Restocks quantities and updates status automatically
-  - Uses Firestore **batch writes** for safer, atomic updates
-- **Client-side Business Rules**
-  - Deposit calculation based on category/subcategory risk ranges
-  - Inventory consistency using `totalQuantity` and `availableQuantity`
-  - Availability checks before allowing rental actions (based on status/quantity)
+### 🧠 Application Logic
+- **Client-side Business Logic**  
+  Item availability, quantity management, deposit calculation, and expired rental handling are implemented in the application layer and synchronized with Firestore.
 
-### 🖼️ Media Handling
-- **image_picker**
-  - Selects item images from the device gallery
-- **flutter_image_compress + path_provider**
-  - Compresses images before upload (smaller file size, faster uploads)
-  - Uses temporary storage for compressed image generation
-
-### 🧩 Helpful UI Libraries
-- **photo_view**
-  - Full-screen image preview with zoom/pan and swipe gallery support
+### 🖼️ Media & UI Enhancements
+- **Image Picker & Image Compression**  
+  Used to select and optimize images before upload for better performance.
+- **Photo View**  
+  Enables full-screen image preview with zoom and swipe support.
 
 ---
 
